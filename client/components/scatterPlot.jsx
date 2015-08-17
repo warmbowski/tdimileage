@@ -53,18 +53,16 @@ ScatterPlot = React.createClass({
       .attr("transform", "translate(0," + y.range()[0] + ")");
     svg.append("g").attr("class", "y axis");
     svg.append("text")
+      .attr("class", "label")
       .attr("fill", "#414241")
       .attr("text-anchor", "end")
-      .attr("x", props.width / 2)
-      .attr("y", props.height - props.margins.bottom - 5)
+      .attr("transform", "translate(" + (props.width - props.margins.right - 39) + ", 415)")
       .text("Avg MPH (per tank)");
     svg.append("text")
+      .attr("class", "label")
       .attr("fill", "#414241")
       .attr("text-anchor", "end")
-      .attr("transform", "translate(-25," + (props.height / 2) + ")rotate(-90)" )
-      // .attr("x", props.margins.left + 5)
-      // .attr("y", props.height / 2)
-
+      .attr("transform", "translate(10, 0)rotate(-90)")
       .text("MPG (per tank)");
     svg.selectAll("g.y.axis").call(yAxis);
     svg.selectAll("g.x.axis").call(xAxis);
