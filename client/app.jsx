@@ -1,5 +1,6 @@
 Meteor.startup(function () {
   // code to run on client at startup
+  React.render(<AppParent />, document.getElementById('app-container'));
 });
 
 // counter starts at 0
