@@ -67,19 +67,37 @@ ScatterPlot = React.createClass({
     svg.selectAll("g.y.axis").call(yAxis);
     svg.selectAll("g.x.axis").call(xAxis);
 
-    var fuels = svg.selectAll("g.node").data(data.perTank, function(item) {
-        return item.fuelType;
-    });
-    var fuelsGroup = fuels.enter().append("g").attr("class", "node")
-      .attr('transform', function(item) {
-        return "translate(" + x(item.mph) + "," + y(item.mpg) + ")";
-      });
-    fuelsGroup.append("circle")
-      .attr("r", 5)
+    svg.selectAll(".dot")
+      .data(data.perTank)
+    .enter().append("circle")
       .attr("class", "dot")
-      .style("fill", function(item) {
-          return colors(item.fuelType);
-      });
+      .attr("r", 5)
+      .attr("cx", function(d) { return x(d.mph); })
+      .attr("cy", function(d) { return y(d.mpg); })
+      .style("fill", function(d) { return colors(d.fuelType); });
+
+    var legend = svg.selectAll(".legend")
+        .data(colors.domain())
+      .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) {
+          return "translate(0," + i * 20 + ")";
+        });
+
+    legend.append("rect")
+        .attr("x", props.width - 60)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", colors);
+
+    legend.append("text")
+        .attr("x", props.width - 65)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) {
+          return d;
+        });
   },
 
   render: function() {

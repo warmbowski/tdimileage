@@ -9,3 +9,4 @@ A comparison viz of fuel mileage for a Passat 2005 TDI Wagon writting with Meteo
 * Examples of D3 Scatterplots
   * http://jsfiddle.net/eamonnmag/Q567s/
   * http://bl.ocks.org/weiglemc/6185069
+  * http://blog.axc.net/tutorial-how-to-build-a-qlik-sense-extension-with-d3/
