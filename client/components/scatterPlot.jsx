@@ -67,14 +67,31 @@ ScatterPlot = React.createClass({
     svg.selectAll("g.y.axis").call(yAxis);
     svg.selectAll("g.x.axis").call(xAxis);
 
-    svg.selectAll(".dot")
+    var dots = svg.selectAll(".dot")
       .data(data.perTank)
-    .enter().append("circle")
+      .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 5)
       .attr("cx", function(d) { return x(d.mph); })
       .attr("cy", function(d) { return y(d.mpg); })
       .style("fill", function(d) { return colors(d.fuelType); });
+
+    var mouseOn = function() {
+  		var dot = d3.select(this);
+  		dot.transition()
+  		  .duration(800).style("opacity", 1)
+  		  .attr("r", 10).ease("elastic");
+    };
+
+    var mouseOff = function() {
+      var dot = d3.select(this);
+      dot.transition()
+        .duration(800).style("opacity", 0.7)
+        .attr("r", 5).ease("elastic");
+    };
+
+    dots.on("mouseover", mouseOn);
+    dots.on("mouseout", mouseOff);
 
     var legend = svg.selectAll(".legend")
         .data(colors.domain())
