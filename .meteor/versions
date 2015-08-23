@@ -36,6 +36,7 @@ mobile-status-bar@1.0.3
 momentjs:moment@2.10.6
 mongo@1.1.0
 observe-sequence@1.0.6
+ongoworks:google-spreadsheets@0.4.2_1
 ordered-dict@1.0.3
 random@1.0.3
 react@0.1.7

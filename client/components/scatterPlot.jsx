@@ -67,18 +67,73 @@ ScatterPlot = React.createClass({
     svg.selectAll("g.y.axis").call(yAxis);
     svg.selectAll("g.x.axis").call(xAxis);
 
-    var fuels = svg.selectAll("g.node").data(data.perTank, function(item) {
-        return item.fuelType;
-    });
-    var fuelsGroup = fuels.enter().append("g").attr("class", "node")
-      .attr('transform', function(item) {
-        return "translate(" + x(item.mph) + "," + y(item.mpg) + ")";
-      });
-    fuelsGroup.append("circle")
+    var dots = svg.selectAll(".dot")
+      .data(data.perTank)
+      .enter().append("circle")
+      .attr("class", function(d) { return "dot " + d.fuelType; })
       .attr("r", 5)
-      .attr("class", "dot")
-      .style("fill", function(item) {
-          return colors(item.fuelType);
+      .attr("cx", function(d) { return x(d.mph); })
+      .attr("cy", function(d) { return y(d.mpg); })
+      .style("fill", function(d) { return colors(d.fuelType); });
+
+    var mouseOn = function() {
+  		var dot = d3.select(this);
+  		dot.transition()
+  		  .duration(800).style("opacity", 1)
+  		  .attr("r", 10).ease("elastic");
+    };
+
+    var mouseOff = function() {
+      var dot = d3.select(this);
+      dot.transition()
+        .duration(800).style("opacity", 0.7)
+        .attr("r", 5).ease("elastic");
+    };
+
+    var catClick = function(category) {
+      var allCategories = $("rect.category")
+      var selectedCategory = d3.select(this);
+      var allDots = d3.selectAll(".dot");
+      var catDots = d3.selectAll("." + category);
+
+      if(selectedCategory.classed("selected") === true) {
+        allDots.attr("class", function(d) { return "dot " + d.fuelType; });
+        allCategories.attr("class", "category");
+      } else {
+        allDots.attr("class", function(d) { return "dot unselected " + d.fuelType; });
+        allCategories.attr("class", "category unselected");
+        catDots.attr("class", function(d) { return "dot selected " + d.fuelType; });
+        selectedCategory.attr("class", "category selected");
+      }
+    };
+
+    dots.on("mouseover", mouseOn);
+    dots.on("mouseout", mouseOff);
+
+
+    var legend = svg.selectAll(".legend")
+      .data(colors.domain())
+      .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) {
+        return "translate(0," + i * 20 + ")";
+      });
+
+    legend.append("rect")
+      .attr("class", "category")
+      .attr("x", props.width - 60)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", colors)
+      .on("click", catClick);
+
+    legend.append("text")
+      .attr("x", props.width - 65)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) {
+        return d;
       });
   },
 
