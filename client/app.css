@@ -23,7 +23,29 @@ text {
 .node {
     cursor:pointer;
 }
+
 .dot {
     opacity: .7;
     cursor: pointer;
+}
+
+.dot.selected {
+  opacity: 1;
+}
+
+.dot.unselected {
+  opacity: .3;
+}
+
+.category {
+  opacity: .7;
+  cursor: pointer;
+}
+
+.category.selected {
+  opacity: 1;
+}
+
+.category.unselected {
+  opacity: .3;
 }

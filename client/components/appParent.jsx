@@ -19,23 +19,10 @@ AppParent = React.createClass({
           }
         }
       });
-    console.log(tankData);
     }
 
     return {
       perTank: tankData
-      // perTank: [
-      //   {
-      //     fuelType: 'USLD',
-      //     mpg: 25,
-      //     mph: 17
-      //   },
-      //   {
-      //     fuelType: 'B99',
-      //     mpg: 35,
-      //     mph: 27
-      //   },
-      // ]
     };
   },
 
