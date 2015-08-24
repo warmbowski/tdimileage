@@ -1,32 +1,41 @@
 body {
-    font-family:"Helvetica Neue";
-    color: #686765;
+  font-family:"Helvetica Neue";
+  color: #686765;
 }
 .name {
-    float:right;
-    color:#27aae1;
+  float:right;
+  color:#27aae1;
 }
 .axis {
-    fill: none;
-    stroke: #AAA;
-    stroke-width: 1px;
+  fill: none;
+  stroke: #AAA;
+  stroke-width: 1px;
 }
 text {
-    stroke: none;
-    fill: #666666;
-    font-size: .6em;
-    font-family:"Helvetica Neue"
+  stroke: none;
+  fill: #666666;
+  font-size: .6em;
+  font-family:"Helvetica Neue"
 }
 .label {
-    fill: #414241;
+  fill: #414241;
 }
 .node {
-    cursor:pointer;
+  cursor:pointer;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: white;
+  font-size: 0.5em;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
 }
 
 .dot {
-    opacity: .7;
-    cursor: pointer;
+  opacity: .7;
+  cursor: pointer;
 }
 
 .dot.selected {

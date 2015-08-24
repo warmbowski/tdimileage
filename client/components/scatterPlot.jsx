@@ -33,6 +33,7 @@ ScatterPlot = React.createClass({
     var data = props.data;
     var svg = d3.select("svg > g");
     var colors = d3.scale.category10();
+
     var x = d3.scale.linear()
       // .domain(d3.extent(data.perTank, function(item) {
       //   return item.mph;
@@ -67,6 +68,10 @@ ScatterPlot = React.createClass({
     svg.selectAll("g.y.axis").call(yAxis);
     svg.selectAll("g.x.axis").call(xAxis);
 
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
     var dots = svg.selectAll(".dot")
       .data(data.perTank)
       .enter().append("circle")
@@ -76,18 +81,29 @@ ScatterPlot = React.createClass({
       .attr("cy", function(d) { return y(d.mpg); })
       .style("fill", function(d) { return colors(d.fuelType); });
 
-    var mouseOn = function() {
+    var mouseOn = function(d) {
   		var dot = d3.select(this);
+      x = dot[0][0].cx.baseVal.value;
+      y = dot[0][0].cy.baseVal.value;
   		dot.transition()
   		  .duration(800).style("opacity", 1)
   		  .attr("r", 10).ease("elastic");
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 1);
+      tooltip.html("MPH: " + d.mph + "<br/>MPG: " + (Math.round(d.mpg*10)/10).toFixed(1))
+        .style("left", (x + 50) + "px")
+        .style("top", (y + 70) + "px");
     };
 
     var mouseOff = function() {
       var dot = d3.select(this);
       dot.transition()
-        .duration(800).style("opacity", 0.7)
+        .duration(800).style("opacity", null)
         .attr("r", 5).ease("elastic");
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 0);
     };
 
     var catClick = function(category) {
