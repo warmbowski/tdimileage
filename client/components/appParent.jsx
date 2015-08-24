@@ -8,7 +8,7 @@ AppParent = React.createClass({
     if(rawData[0]) {
       var cellData = rawData[0].cells;
 
-      $.each(cellData, function(key, val) {
+      _.each(cellData, function(val, key) {
         var temp = {};
         if (!(typeof val[4] === 'undefined') && !(typeof val[17] === 'undefined') && !(typeof val[19] === 'undefined')) {
           if(val[4].value === 'ULSD' || val[4].value === 'B99'){
