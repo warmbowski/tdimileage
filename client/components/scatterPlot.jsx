@@ -83,8 +83,8 @@ ScatterPlot = React.createClass({
 
     var mouseOn = function(d) {
   		var dot = d3.select(this);
-      x = dot[0][0].cx.baseVal.value;
-      y = dot[0][0].cy.baseVal.value;
+      var cx = dot[0][0].cx.baseVal.value;
+      var cy = dot[0][0].cy.baseVal.value;
   		dot.transition()
   		  .duration(800).style("opacity", 1)
   		  .attr("r", 10).ease("elastic");
@@ -92,8 +92,8 @@ ScatterPlot = React.createClass({
         .duration(500)
         .style("opacity", 1);
       tooltip.html("MPH: " + d.mph + "<br/>MPG: " + (Math.round(d.mpg*10)/10).toFixed(1))
-        .style("left", (x + 50) + "px")
-        .style("top", (y + 70) + "px");
+        .style("left", (cx + 50) + "px")
+        .style("top", (cy + 70) + "px");
     };
 
     var mouseOff = function() {
