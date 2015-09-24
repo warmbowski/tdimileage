@@ -1,17 +1,13 @@
 Dot = React.createClass({
   getDefaultProps: function() {
     return {
-      width: 0,
-      height: 0,
-      offset: 0
+      r: 5
     }
   },
 
   render: function() {
     return (
-      <rect fill={this.props.color}
-        width={this.props.width} height={this.props.height} 
-        x={this.props.offset} y={this.props.availableHeight - this.props.height} />
+      <circle className={'dot ' + this.props.fuel} fill={this.props.color} cx={this.props.cx} cy={this.props.cy} r={this.props.r}/>
     );
   }
 });

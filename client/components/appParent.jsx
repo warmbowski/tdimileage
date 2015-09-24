@@ -30,6 +30,9 @@ AppParent = React.createClass({
     return (
       <section id='scatter-plot'>
         <ScatterPlot data={this.data} />
+        <hr/>
+        <ScatterChart data={this.data} width={640} height={480} />
+        <hr/>
       </section>
     );
   }
